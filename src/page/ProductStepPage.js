@@ -38,7 +38,11 @@ export default function ProductStepPage(props) {
             text : "",
             step : 0
         }
-        if(order.status === "UPLOADSLIP") {
+        debugger
+        if(order.status === "ORDER") {
+            data.step = 0
+            data.text = tc.statusOrder.NOT
+        } else if(order.status === "UPLOADSLIP") {
             data.step = 1
             data.text = tc.statusOrder.UPLOADSLIP
         } else if(order.status === "PAY") {
@@ -64,6 +68,10 @@ export default function ProductStepPage(props) {
             <h5 className="text-center text-secondary">สถานะการสั่งซื้อ</h5>
             <h5 className="text-center text-secondary">คำสั่งซื้อหมายเลข : <span className="font-weight-bold">{orderId}</span></h5>
             <h2 className="text-center font-weight-bold" style={{marginTop : "30px"}}>({statusState ? statusState.text : "ไม่พบคำสั่งซื้อนี้"})</h2>
+            {
+                statusState.step === 0 ?<a href={`/payment/${orderId}`} target="_blank"><u><p className="text-center pointer">(ส่งหลักฐานการชำระเงิน คลิก)</p></u></a> : ""
+            }
+            
             {statusState ?
             <>
                 <div style={{marginTop : "30px"}}>

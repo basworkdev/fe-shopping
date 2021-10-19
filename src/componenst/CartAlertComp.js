@@ -21,7 +21,7 @@ export default function CartAlertComp(props) {
             {props.data ? 
             <div className="row">
                 <div className="col-4">
-                    <img src={`${process.env.REACT_APP_ENGINE_URL}images/${props.data.mainImg}`} width="100%"/>
+                    <img src={`${process.env.REACT_APP_ENGINE_URL}${props.data.mainImg}`} width="100%"/>
                 </div>
                 <div className="col-8">
                     <h4 className="font-weight-bold">{props.data.name}</h4>

@@ -17,19 +17,27 @@ export default function HomePage(props) {
     const [spinnerState,setSpinnerState] = useState(false);
     const [rooftopTentState , setRooftopTentState ] = useState([])
     const [tentState , setTentState] = useState([])
-    const [assistiveDeviceState , setAssistiveDeviceState] = useState([])
+    const [assistiveDeviceOffroadState , setAssistiveDeviceOffroadState] = useState([])
+    const [campingAccessoriesState , setAampingAccessoriesState] = useState([])
+
+    const [carAccessoriesState , setCarAccessoriesState] = useState([])
 
 
     useEffect(async () => {
         setSpinnerState(true)
         let roofTopTent = await getProductByType("ROOF_TOP_TENT");
         let tent = await getProductByType("TENT");
-        let assistiveDevice = await getProductByType("ASSISTIVE-DEVICE");
+        let assistiveDeviceOffroad = await getProductByType("ASSISTIVE_DEVICE_OFF_ROAD");
+        let campingAccessories = await getProductByType("CAMPING_ACCESSORIES");
+        let carAccessories = await getProductByType("CAR_ACCESSORIES");
 
         setRooftopTentState(roofTopTent);
         setTentState(tent);
-        setAssistiveDeviceState(assistiveDevice);
+        setAssistiveDeviceOffroadState(assistiveDeviceOffroad);
+        setAampingAccessoriesState(campingAccessories);
+        setCarAccessoriesState(carAccessories)
         setSpinnerState(false)
+
     }, [])
 
     const getProductByType = async (typeId) => {
@@ -132,8 +140,22 @@ export default function HomePage(props) {
             <br/>
             <div className="container">
                 <div className="line-product-title">
+                    <h4>อุปกรณ์ช่วยเหลือในเส้นทางออฟโรด</h4>
+                    <p className="p-product-title text-secondary">อุปกรณ์ช่วยเหลือในเส้นทางออฟโรด เพื่อให้เราไปถึงเส้นชัยและเป่าหมายที่เราตั้งไว้</p>
+                </div>
+                <br/>
+                <div className="row">
+                    {setCardProduct(assistiveDeviceOffroadState)}
+                </div>
+                <div className="text-right other-btn">
+                    <a href="/catalog/tent" type="button" className="btn btn-primary">เพิ่มเติม</a>
+                </div>
+            </div>
+            <br/>
+            <div className="container">
+                <div className="line-product-title">
                     <h4>เต็นท์และเครื่องนอน</h4>
-                    <p className="p-product-title text-secondary">เต็นท์สำหรับรถยนต์ ไม่ว่าจะรถเล็กหรือรถใหญ่ก็สามารถติดตั้งได้</p>
+                    <p className="p-product-title text-secondary">เต็นท์และเครื่องนอน คุณภาพมาตรฐาน สำหรับสายแคมป์ปิ้ง</p>
                 </div>
                 <br/>
                 <div className="row">
@@ -151,10 +173,24 @@ export default function HomePage(props) {
                 </div>
                 <br/>
                 <div className="row">
-                    {setCardProduct(assistiveDeviceState)}
+                    {setCardProduct(campingAccessoriesState)}
                 </div>
                 <div className="text-right other-btn">
                     <a href="/catalog/assistive-device" type="button" className="btn btn-primary">เพิ่มเติม</a>
+                </div>
+            </div>
+            <br/>
+            <div className="container">
+                <div className="line-product-title">
+                    <h4>อุปกรณ์ตกแต่งรถ</h4>
+                    <p className="p-product-title text-secondary">อุปกรณ์ตกแตงรถยนต์ออฟโรด ให้ดูแรงแกร่ง ดุดัน และใช้งานได้จริง</p>
+                </div>
+                <br/>
+                <div className="row">
+                    {setCardProduct(carAccessoriesState)}
+                </div>
+                <div className="text-right other-btn">
+                    <a href="/catalog/car-accessories" type="button" className="btn btn-primary">เพิ่มเติม</a>
                 </div>
             </div>
             <br/>

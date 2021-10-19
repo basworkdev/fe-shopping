@@ -8,7 +8,7 @@ export default function CardProductComp(props) {
         <a href={`/product/${productState.productKey}`} style={{textDecoration: "none" }}>
         <div className="card-product">
             <div className="img-product-card-home">
-                <img src={`${process.env.REACT_APP_ENGINE_URL}images/${productState.mainImg}`} className="card-img-top" width="100%" alt="..."/>
+                <img src={`${process.env.REACT_APP_ENGINE_URL}${productState.mainImg}`} className="card-img-top" width="100%" alt="..."/>
                 {productState.fullPrice !== productState.price ? 
                     <div className="sell">-{numeral(apisMain.percentSell(productState.fullPrice,productState.price)).format('0')}%</div> 
                 : ""}

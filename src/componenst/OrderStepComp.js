@@ -16,12 +16,22 @@ export default function OrderStepComp(props) {
     {orderState ? 
         <div className="desktop">
             <div className="md-stepper-horizontal orange">
-                <div className={`md-step done ${props.status.step >= 1 ? "active" : ""}`}>
-                    <div className="md-step-circle"><span>1</span></div>
-                    <div className="md-step-title">{orderState.status === "UPLOADSLIP" ? tc.statusOrder.UPLOADSLIP : tc.statusOrder.PAY}</div>
-                    <div className="md-step-bar-left"></div>
-                    <div className="md-step-bar-right"></div>
-                </div>
+                {props.status.step === 0 ?
+                    <div className={`md-step done ${props.status.step == 0 ? "active" : ""}`}>
+                        <div className="md-step-circle"><span>1</span></div>
+                        <div className="md-step-title">{tc.statusOrder.NOT}</div>
+                        <div className="md-step-bar-left"></div>
+                        <div className="md-step-bar-right"></div>
+                    </div>
+                :
+                    <div className={`md-step done ${props.status.step >= 1 ? "active" : ""}`}>
+                        <div className="md-step-circle"><span>1</span></div>
+                        <div className="md-step-title">{orderState.status === "UPLOADSLIP" ? tc.statusOrder.UPLOADSLIP : tc.statusOrder.PAY}</div>
+                        <div className="md-step-bar-left"></div>
+                        <div className="md-step-bar-right"></div>
+                    </div>
+                }
+                
                 <div className={`md-step editable ${props.status.step >= 2 ? "active" : ""}`}>
                     <div className="md-step-circle"><span>2</span></div>
                     <div className="md-step-title">{tc.statusOrder.PACKED}</div>
@@ -65,7 +75,11 @@ export default function OrderStepComp(props) {
         <div className="container">
             <div className="wrapper">
                 <ul className="StepProgress">
-                    <li className={`StepProgress-item is-pay ${props.status.step >= 1 ? "active" : "text-black-50 "}`}><strong>{orderState.status === "UPLOADSLIP" ? tc.statusOrder.UPLOADSLIP : tc.statusOrder.PAY}</strong></li>
+                    {props.status.step === 0 ?
+                        <li className={`StepProgress-item is-pay ${props.status.step === 0 ? "active" : "text-black-50 "}`}><strong>{tc.statusOrder.NOT}</strong></li>
+                    :
+                        <li className={`StepProgress-item is-pay ${props.status.step >= 1 ? "active" : "text-black-50 "}`}><strong>{orderState.status === "UPLOADSLIP" ? tc.statusOrder.UPLOADSLIP : tc.statusOrder.PAY}</strong></li>
+                    }
                     <li className={`StepProgress-item is-box ${props.status.step >= 2 ? "active" : "text-black-50"}`}><strong>{tc.statusOrder.PACKED}</strong></li>
                     <li className={`StepProgress-item is-send ${props.status.step >= 3 ? "active" : "text-black-50"}`}>
                         {orderState.delivery_company ?
