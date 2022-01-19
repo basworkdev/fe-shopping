@@ -43,7 +43,7 @@ export default function ShipmentInfoPage(props) {
 
     useEffect(()=>{
         let address = JSON.parse(localStorage.getItem("customerAddress"))
-        debugger
+        
         if(address) {
             setAddressState(address);
             if(address.province) {
@@ -112,7 +112,6 @@ export default function ShipmentInfoPage(props) {
     }
 
     const onSubmit = async (data) => {
-        debugger
         console.log(data);
         // ------------------------------ //
         let orderSummary = inStoreCart.OrderSummary;

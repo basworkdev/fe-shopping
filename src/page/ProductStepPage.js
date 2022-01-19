@@ -38,7 +38,6 @@ export default function ProductStepPage(props) {
             text : "",
             step : 0
         }
-        debugger
         if(order.status === "ORDER") {
             data.step = 0
             data.text = tc.statusOrder.NOT

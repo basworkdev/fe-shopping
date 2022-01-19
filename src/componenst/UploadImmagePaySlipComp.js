@@ -3,6 +3,7 @@ import { BrowserRouter as Router, useParams ,useHistory } from "react-router-dom
 import axios from "axios";
 import bootbox from 'bootbox';
 import tc from "../config/text.json"
+import {storage} from "../firebase"
 
 // Apis
 import MainApi from "../apis/MainApi"
@@ -22,18 +23,47 @@ export default function UploadImageComp(props) {
     const [imagePreviewUrl, setImagePreviewUrl] = useState(null) // ##ใช้เพื่อภาพ Preview
     const [imageResState , setImageResState] = useState({});
     const [imageState,setImageState] = useState();
+    const [image,setImage] = useState(null)
     const [showImageState , setShowImageState] = useState();
+    const [progress, setProgress] = useState(0);
+    const [urlImage,setUrlImage] = useState("")
+
+    // const handleUploadImage = (e) => { 
+    //     const file = e.target.files[0] // ## เก็บไว้ setState ลงใน file
+    //     const reader = new FileReader(); // ## เรียก Class FileReader เพื่อแปลง file image ที่รับเข้ามา
+    //     reader.onloadend = () => { // ## เป็น eventของFileReaderเมื่อโหลดภาพเสร็จ
+    //         setFile(file) // ## ทำการ setState
+    //         setImagePreviewUrl(reader.result) // ##เหมือนด้านบน
+    //         // props.uploadImage(reader.result)
+    //         setShowImageState(reader.result)
+    //     }
+    //     reader.readAsDataURL(file) // ## เป็นส่วนของการแสดงรูป ไม่ค่อยแน่ใจครับ ผู้รู้ช่วยคอมเม้นบอกด้วยนะครับ
+    // }
+
+    useEffect(()=>{
+        if(progress === 100 && urlImage) {
+            updateOrder(urlImage)
+        }
+    },[progress,urlImage])
 
     const handleUploadImage = (e) => { 
-        const file = e.target.files[0] // ## เก็บไว้ setState ลงใน file
-        const reader = new FileReader(); // ## เรียก Class FileReader เพื่อแปลง file image ที่รับเข้ามา
-        reader.onloadend = () => { // ## เป็น eventของFileReaderเมื่อโหลดภาพเสร็จ
-            setFile(file) // ## ทำการ setState
-            setImagePreviewUrl(reader.result) // ##เหมือนด้านบน
-            // props.uploadImage(reader.result)
-            setShowImageState(reader.result)
+        try {
+            const file = e.target.files[0] // ## เก็บไว้ setState ลงใน file
+            const reader = new FileReader(); // ## เรียก Class FileReader เพื่อแปลง file image ที่รับเข้ามา
+            reader.onloadend = () => { // ## เป็น eventของFileReaderเมื่อโหลดภาพเสร็จ
+                setFile(file) // ## ทำการ setState
+                setImagePreviewUrl(reader.result) // ##เหมือนด้านบน
+                // props.uploadImage(reader.result)
+                setShowImageState(reader.result)
+            }
+            reader.readAsDataURL(file) // ## เป็นส่วนของการแสดงรูป ไม่ค่อยแน่ใจครับ ผู้รู้ช่วยคอมเม้นบอกด้วยนะครับ
+            if(file){
+                setImage(e.target.files[0])
+            }
+        } catch (error) {
+            console.log(error)
         }
-        reader.readAsDataURL(file) // ## เป็นส่วนของการแสดงรูป ไม่ค่อยแน่ใจครับ ผู้รู้ช่วยคอมเม้นบอกด้วยนะครับ
+        
     }
 
     const onClickUpload = async () => {
@@ -49,27 +79,66 @@ export default function UploadImageComp(props) {
     }
 
     const saveOrder = async () => {
-        setSpinnerState(true)
-        let resp = await MainApi.doserviceUploadImageSlipPay(imageState);
-        if(resp.filename) {
-            let dataUpdate = {
-                orderId : props.order.orderId,
-                pay_status : props.order.pay_status,
-                pay_date : new Date(),
-                status : props.order.status,
-                pay_image : `${process.env.REACT_APP_ENGINE_URL}imagesSlipPay/${resp.filename}`
+        try {
+            setSpinnerState(true)
+            const imageName = `paySlip/${props.order.orderId}-${image.name}`;
+            const uploadTask = storage.ref(imageName).put(image);
+
+            uploadTask.on(
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                setProgress(progress);
+                console.log("progress",progress)
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+                storage
+                .ref("images")
+                .child(image.name)
+                .getDownloadURL()
+                .then(url => {
+                    setUrlImage(url)
+                });
             }
-            let respUpdate = await OrderApi.doserviceUpdateSlip(dataUpdate);
-            if(respUpdate.code === 1) {
-                nextStepPage();
-            }
-        } else {
-            bootbox.alert(tc.validate.errorUploadImage);
+            );
+        } catch (error) {
+            console.log(error)
+            setSpinnerState(false)
         }
-        setSpinnerState(false)
-        setShowImageState(resp);
-        console.log("resp",resp);
+        
         //history.push(`/order-status/${orderId}`)
+    }
+
+    const updateOrder = async (url) => {
+        try {
+            setSpinnerState(true)
+            if(url) {
+                let dataUpdate = {
+                    orderId : props.order.orderId,
+                    pay_status : props.order.pay_status,
+                    pay_date : new Date(),
+                    status : props.order.status,
+                    pay_image : url
+                }
+                let respUpdate = await OrderApi.doserviceUpdateSlip(dataUpdate);
+                if(respUpdate.code === 1) {
+                    nextStepPage();
+                }
+            } else {
+                bootbox.alert(tc.validate.errorUploadImage);
+            }
+            setSpinnerState(false)
+        } catch (error) {
+            setSpinnerState(false)
+            console.log(error)
+        }
+        // setShowImageState(resp);
+        // console.log("resp",resp);
     }
 
     const nextStepPage = () => {
@@ -80,7 +149,7 @@ export default function UploadImageComp(props) {
         }
     }
         
-   
+   console.log("image" ,image)
     return (
         <>
             <SpinnerComp spinner={spinnerState}/>
