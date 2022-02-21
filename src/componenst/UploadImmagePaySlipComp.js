@@ -18,6 +18,7 @@ import SpinnerComp from "./SpinnerComp"
 
 export default function UploadImageComp(props) {
     let history = useHistory();
+    let moment = require('moment');
     const [spinnerState,setSpinnerState] = useState(false);
     const [file, setFile] = useState({}) // ## ใช้เพื่อส่งไปที่ API
     const [imagePreviewUrl, setImagePreviewUrl] = useState(null) // ##ใช้เพื่อภาพ Preview
@@ -41,9 +42,16 @@ export default function UploadImageComp(props) {
     // }
 
     useEffect(()=>{
-        if(progress === 100 && urlImage) {
-            updateOrder(urlImage)
+        console.log("useEffect urlImage 01" , urlImage)
+        try {
+            if(progress === 100 && urlImage) {
+                console.log("useEffect urlImage 02" , urlImage)
+                updateOrder(urlImage)
+            }
+        } catch (error) {
+            console.log(error)
         }
+        
     },[progress,urlImage])
 
     const handleUploadImage = (e) => { 
@@ -81,8 +89,10 @@ export default function UploadImageComp(props) {
     const saveOrder = async () => {
         try {
             setSpinnerState(true)
-            const imageName = `paySlip/${props.order.orderId}-${image.name}`;
-            const uploadTask = storage.ref(imageName).put(image);
+            let filePage = "paySlip/"
+            const imageName = `${moment().format("YYMMDDHHmmss").toString()}-${props.order.orderId}-${(Math.floor(Math.random()*(999-100+1)+100)).toString()}`;
+            let pageUrl = filePage+imageName
+            const uploadTask = storage.ref(pageUrl).put(image);
 
             uploadTask.on(
             "state_changed",
@@ -98,8 +108,8 @@ export default function UploadImageComp(props) {
             },
             () => {
                 storage
-                .ref("images")
-                .child(image.name)
+                .ref("paySlip")
+                .child(imageName)
                 .getDownloadURL()
                 .then(url => {
                     setUrlImage(url)
@@ -107,8 +117,9 @@ export default function UploadImageComp(props) {
             }
             );
         } catch (error) {
-            console.log(error)
             setSpinnerState(false)
+            console.log(error)
+            
         }
         
         //history.push(`/order-status/${orderId}`)

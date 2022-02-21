@@ -26,7 +26,7 @@ import PaymentPage from './page/PaymentPage'
 import ProductStepPage from './page/ProductStepPage'
 import TrackingPage from './page/TrackingPage'
 import ContactUsPage from './page/ContactUsPage'
-import TestUploadImage from './page/TestUploadImage'
+// import TestUploadImage from './page/TestUploadImage'
 
 // Components
 import OpenChatComp from './componenst/OpenChatComp'
@@ -128,9 +128,9 @@ export default function Main(props) {
             <Route path="/contact-us">
                 <ContactUsPage/>
             </Route>
-            <Route path="/testuploadimage">
+            {/* <Route path="/testuploadimage">
                 <TestUploadImage/>
-            </Route>
+            </Route> */}
             </Switch>
         </Router>
         <FooterComp/>
