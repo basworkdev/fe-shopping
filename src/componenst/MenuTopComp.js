@@ -34,12 +34,12 @@ export default function MenuTopComp(props) {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <SearchComp/>
-            <a className="navbar-brand logo-menu" style={{cursor : "pointer"}} href="/home"><img src="../image/logo2.png" width="80px"/></a>
+            <a className="navbar-brand logo-menu" style={{cursor : "pointer"}} href="/"><img src="../image/logo2.png" width="80px"/></a>
             
             <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li className="nav-item active">
-                    <a className="nav-link" href="/home">หน้าหลัก <span className="sr-only">(current)</span></a>
+                    <a className="nav-link" href="/">หน้าหลัก <span className="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownProduct" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

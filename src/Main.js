@@ -62,10 +62,10 @@ export default function Main(props) {
 
     useEffect(()=>{
         setCart();
-        let url = window.location
-        let typeUser = url.pathname.split("/")[1];
-        setSubUrlState(url.pathname.split("/"));
-        setTypeUserState(typeUser);
+        // let url = window.location
+        // let typeUser = url.pathname.split("/")[1];
+        // setSubUrlState(url.pathname.split("/"));
+        // setTypeUserState(typeUser);
     },[])
 
     const setCart = () => {
@@ -95,6 +95,7 @@ export default function Main(props) {
             {/* <Route path="/">
                 <HomePage/>
             </Route> */}
+            
             <Route path="/home">
                 <HomePage/>
             </Route>
@@ -131,6 +132,7 @@ export default function Main(props) {
             {/* <Route path="/testuploadimage">
                 <TestUploadImage/>
             </Route> */}
+            <HomePage/>
             </Switch>
         </Router>
         <FooterComp/>
