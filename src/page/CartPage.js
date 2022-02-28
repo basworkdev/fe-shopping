@@ -165,7 +165,7 @@ export default function CartPage(props) {
                                 <div className="col-md-7 col-11">
                                     <div className="row">
                                         <div className="col-3">
-                                            <a href={`/product/${data.productKey}`} style={{textDecoration: "none" }}> <img src={`${process.env.REACT_APP_ENGINE_URL}${data.mainImg}`} width="100%"/> </a>
+                                            <a href={`/product/${data.productKey}`} style={{textDecoration: "none" }}> <img src={`${data.mainImg}`} width="100%"/> </a>
                                         </div>
                                         <div className="col-9 product-detail-cart">
                                             <a href={`/product/${data.productKey}`} style={{textDecoration: "none" }}> <h5 className="font-weight-bold">{data.name}</h5> </a>

@@ -209,7 +209,7 @@ export default function ProductPage(props) {
             <div className="col-md-6">
                 <div className="pro-img-page">
                     <div className="pro-container-discount-persen-page">
-                        <img src={`${process.env.REACT_APP_ENGINE_URL}images/${productImageState}`} width="100%"/>
+                        <img src={`${productImageState}`} width="100%"/>
                         {
                             productState.fullPrice !== productState.price ? 
                             <div className="pro-discount-persen-page">
@@ -231,7 +231,7 @@ export default function ProductPage(props) {
                                         className={`pro-sum-img-page ${data === productImageState ? "active" : ""}`}
                                         onClick={()=>{clickViewImage(data)}}
                                     >
-                                        <img src={`${process.env.REACT_APP_ENGINE_URL}images/${data}`} width="100%"/>
+                                        <img src={`${data}`} width="100%"/>
                                     </div>
                                 </div>
                             </>
