@@ -160,3 +160,77 @@
   text-align: center;
   font-size: 1.5rem;
 }
+
+
+.product-variation {
+  overflow: visible;
+  cursor: pointer;
+  min-width: 5rem;
+  min-height: 2.125rem;
+  box-sizing: border-box;
+  padding: .25rem .75rem;
+  margin: 0 8px 8px 0;
+  color: rgba(0,0,0,.8);
+  text-align: left;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,.09);
+  position: relative;
+  background: #fff;
+  outline: 0;
+  word-break: break-word;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-variation--selected {
+  color: #ff0000;
+  border-color: #ff0000;
+}
+button .product-variation:focus {
+  color: var(--brand-primary-color,#ff0000) !important;
+  border-color: var(--brand-primary-color,#ff0000) !important;
+}
+.product-variation:active {
+  color: var(--brand-primary-color,#ff0000) !important;
+  border-color: var(--brand-primary-color,#ff0000) !important;
+}
+.product-variation:visited {
+  color: #ff0000 !important;
+  border-color: #ff0000 !important;
+}
+.product-variation:link {
+  color: #ff0000 !important;
+  border-color: #ff0000 !important;
+}
+.product-variation__tick {
+  width: 1.2rem;
+  height: 1.2rem;
+  position: absolute;
+  overflow: hidden;
+  right: 0;
+  bottom: 0;
+}
+
+.product-variation__tick:before {
+  border: 1.2rem solid transparent;
+  border-bottom: 1.2rem solid var(--brand-primary-color,#ff0000);
+  content: "";
+  position: absolute;
+  right: -1.2rem;
+  bottom: 0;
+}
+
+.product-variation__tick>.icon-tick-bold {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  font-size: 10px;
+}
+.product-variation-svg-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  position: relative;
+}

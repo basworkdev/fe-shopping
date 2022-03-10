@@ -170,6 +170,7 @@ export default function CartPage(props) {
                                         <div className="col-9 product-detail-cart">
                                             <a href={`/product/${data.productKey}`} style={{textDecoration: "none" }}> <h5 className="font-weight-bold">{data.name}</h5> </a>
                                             <div className="text-secondary product-detail-cart-p" style={{marginTop : "-10px"}}>แบรนด์ : {data.brandName_th}</div>
+                                            <div className="text-secondary product-detail-cart-p" style={{marginBottom : "7px"}} hidden={!data.carModel}>รุ่นรถ : {data.carModel}</div>
                                             <div class="pro-color-page-mini active" style={{backgroundColor: `${data.color}`}}></div>
                                             {/* <div className="text-secondary product-detail-cart-p">สี : <div class="pro-color-page-mini active" style={{backgroundColor: `${data.color}`}}></div></div> */}
                                         

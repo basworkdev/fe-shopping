@@ -31,6 +31,7 @@ export default function ProductPage(props) {
     const [spinnerState,setSpinnerState] = useState(false);
     const [productState,setProductStae] = useState();
     const [productTypeState , setProductTypeState ] = useState([])
+    const [modelCarsState , setModelCarsState] = useState([])
     const [detailPopUpCartState, setDetailPopUpCartState] = useState();
 
     const [productImageState , setProductImageState] = useState();
@@ -58,6 +59,20 @@ export default function ProductPage(props) {
             let productByType = await apis.doserviceGetProductByType(product.typeId);
             product.img = product.img.split(",");
             product.color = product.color.split(",");
+            if(product.carModel) {
+                let model = product.carModel.split(",")
+                model = model.map((data)=>{
+                    return {
+                        value : data,
+                        selected : false
+                    }
+                })
+                if(model.length===1) {
+                    model[0].selected = true
+                }
+                setModelCarsState(model)
+            }
+            
             setColorActiveState(product.color[0])
             setProductImageState(product.img[0]);
             setProductStae(product);
@@ -109,8 +124,22 @@ export default function ProductPage(props) {
     }
 
     const buyNow = () => {
-        addtoCart(false);
-        window.location.href = '/cart'
+        let next = false;
+        let selectedModelCar = _.find(modelCarsState , {"selected" : true})
+        if(!selectedModelCar) {
+            if(modelCarsState.length>0) {
+                bootbox.alert(tc.validate.reqCarModel);
+                return
+            } else {
+                next = true
+            }
+        } else {
+            next = true
+        }
+        if(next) {
+            addtoCart(false);
+            window.location.href = '/cart'
+        }
     }
 
     const addtoCart = (popup) => {
@@ -120,6 +149,16 @@ export default function ProductPage(props) {
             let order = 0;
             let Cart = {};
             product = _.find(payload.listForCart, ['id', productState.id]);
+            let selectedModelCar = _.find(modelCarsState , {"selected" : true})
+            let carModel = ""
+            if(!selectedModelCar) {
+                if(modelCarsState.length>0) {
+                    bootbox.alert(tc.validate.reqCarModel);
+                    return
+                } 
+            } else {
+                carModel = selectedModelCar.value
+            }
             if(product) {
                 order = product.order;
                 let listCart = [];
@@ -142,7 +181,8 @@ export default function ProductPage(props) {
                 name : productState.name,
                 brandId : productState.brandId,
                 brandName_th : productState.brandName_th,
-                deliveryCost : productState.deliveryCost
+                deliveryCost : productState.deliveryCost,
+                carModel : carModel
             }
             setDetailPopUpCartState({...Cart , order : orderState});
             Cart.order = orderState + order
@@ -196,6 +236,35 @@ export default function ProductPage(props) {
             } else {
                 return 
             }
+        }
+    }
+
+    const selectedModelCar = (i) => {
+        let modelCar = modelCarsState;
+        modelCar = modelCarsState.map((data,index)=>{
+            if(i === index) {
+                data.selected = true
+            } else {
+                data.selected = false
+            }
+            return data
+        })
+        setModelCarsState(modelCar)
+    }
+
+    const setModelCars = () => {
+        if(modelCarsState.length>0) {
+            return modelCarsState.map((data,index)=>{
+                    return <button onClick={()=>selectedModelCar(index)} key={index} class={`product-variation product-variation${data.selected ? '--selected' : ''}`} aria-label="39" aria-disabled="false">
+                        {data.value}
+                        {data.selected ? 
+                        <div class="product-variation__tick">
+                            <svg enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0" class="product-variation-svg-icon icon-tick-bold"><g><path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z"></path></g></svg>
+                        </div>
+                        : <></>}
+                    </button>
+            })
+
         }
     }
 
@@ -254,6 +323,14 @@ export default function ProductPage(props) {
                     
                     <p className="pro-price-page font-weight-bold">{numeral(productState.price).format('0,0')}.-</p>
                     {numeral(productState.fullPrice).format('0,0') !== numeral(productState.price).format('0,0') ? <p className="pro-discount-page">{numeral(productState.fullPrice).format('0,0')}</p> : ""}
+                    
+                    {modelCarsState.length>0 ? 
+                        <div>
+                            <h5 style={{paddingTop : "0.3rem"}} className="font-weight-bold">รุ่นรถ</h5>
+                            {setModelCars()}
+                        </div> :
+                    <></>}
+                    
                     <h5 style={{paddingTop : "0.3rem"}} className="font-weight-bold">สี</h5>
                     <div className="pro-color-box-page">
                         <div className="row">

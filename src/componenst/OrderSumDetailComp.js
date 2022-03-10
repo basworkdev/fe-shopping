@@ -20,8 +20,22 @@ export default function OrderSumDetailComp(props) {
     const setOrderList = () => {
         return orderState.map((data)=>{
             return <>
-                <div className="col-8"><p>{data.name}</p></div>
-                <div className="col-4 text-right">{data.order_amount} x {numeral(data.price).format('0,0')} บ.</div>
+                
+                <div className="row">
+                    <div className="col-8">
+                        <div style={{paddingTop : 10 , paddingBottom : 10}}>
+                            <p><b>{data.name}</b></p>
+                            <p>แบรนด์ : {data.brandName_th}</p>
+                            <p hidden={!data.carModel}>รุ่นรถ : {data.carModel}</p>
+                        </div>
+                    </div>
+                    <div className="col-4 text-right">
+                        <div style={{paddingTop : 10 , paddingBottom : 10}}>
+                            {data.order_amount} x {numeral(data.price).format('0,0')} บ.
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
             </>
         })
     }
@@ -30,9 +44,7 @@ export default function OrderSumDetailComp(props) {
     <hr/>
     <h4><b>รายละเอียดการสั่งซื้อ</b></h4>
     <div>
-    <div className="row">
         {setOrderList()}
-    </div>
     </div>
     <div className="setail-sum-cart bg-primary" style={{marginTop : 10}}>
         <h4>สรุปยอด</h4>
