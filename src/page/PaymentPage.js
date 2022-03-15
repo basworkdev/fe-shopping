@@ -125,6 +125,7 @@ export default function PaymentPage(props) {
                             pay_status : "UPLOADSLIP",
                             status : "UPLOADSLIP"
                         }} 
+                        orderDetail={orderMainState}
                         nextStepPage={`/order-status/${orderId}`}
                         />
                     

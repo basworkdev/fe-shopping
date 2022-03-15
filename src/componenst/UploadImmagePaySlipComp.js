@@ -134,7 +134,8 @@ export default function UploadImageComp(props) {
                     pay_status : props.order.pay_status,
                     pay_date : new Date(),
                     status : props.order.status,
-                    pay_image : url
+                    pay_image : url,
+                    order : JSON.stringify(props.orderDetail[0])
                 }
                 let respUpdate = await OrderApi.doserviceUpdateSlip(dataUpdate);
                 if(respUpdate.code === 1) {

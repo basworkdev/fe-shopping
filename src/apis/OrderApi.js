@@ -66,7 +66,8 @@ const doserviceUpdateSlip = (data) => {
         pay_status : data.pay_status,
         pay_date : data.pay_date,
         status : data.status,
-        pay_image : data.pay_image
+        pay_image : data.pay_image,
+        order : data.order
     }
     return new Promise((resolve, reject) => {
         axios.post(`${process.env.REACT_APP_ENGINE_URL}updateSlip` , dataUpdate, {
