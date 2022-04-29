@@ -88,8 +88,8 @@ export default function Main(props) {
                 <MenuTopComp/>
             </div>
         </div>
-        <CartButtonComp/>
         <OpenChatComp/>
+        <CartButtonComp/>
         <TopUpComp/>
             <Switch>
             {/* <Route path="/">

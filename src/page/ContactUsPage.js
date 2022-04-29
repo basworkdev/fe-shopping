@@ -11,7 +11,7 @@ export default function ContactUsPage(props) {
         <div className="container" style={{color:"#fff"}}>
             <div style={{paddingTop:"150px"}}>
                 <h1 className="font-weight-bold" style={{fontSize : "3rem"}}>RodX</h1>
-                <p className="font-weight-bold" style={{fontSize : "2rem" , marginTop : "-10px"}}>นึกถึงอุปกรณ์คาร์แคมป์ นึกถึงเรา</p>
+                <p className="font-weight-bold" style={{fontSize : "2rem" , marginTop : "-10px"}}>นึกถึงอุปกรณ์ตกแต่งรถยนต์ออฟโรด และอุปกรณ์คาร์แคมป์ นึกถึงเรา</p>
             </div>
         </div>
     </div>

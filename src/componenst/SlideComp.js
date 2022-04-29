@@ -7,7 +7,7 @@ export default function SlideComp(props) {
                 <Carousel.Item>
                     <img
                     className="d-block w-100"
-                    src="../image/slide1.jpg"
+                    src="../image/slide.jpg"
                     alt="First slide"
                     />
                     <Carousel.Caption>
@@ -15,7 +15,7 @@ export default function SlideComp(props) {
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
                     </Carousel.Caption>
                 </Carousel.Item>
-                <Carousel.Item>
+                {/* <Carousel.Item>
                     <img
                     className="d-block w-100"
                     src="https://s3-ap-southeast-1.amazonaws.com/socialgiver-media-lifestyle/wp-content/uploads/2016/03/31134608/camp1.jpg"
@@ -38,7 +38,7 @@ export default function SlideComp(props) {
                     <h3>Third slide label</h3>
                     <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                     </Carousel.Caption>
-                </Carousel.Item>
+                </Carousel.Item> */}
                 </Carousel>
         </>
     )

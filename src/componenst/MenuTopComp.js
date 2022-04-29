@@ -33,7 +33,7 @@ export default function MenuTopComp(props) {
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <SearchComp/>
+            {/* <SearchComp/> */}
             <a className="navbar-brand logo-menu" style={{cursor : "pointer"}} href="/"><img src="../image/logo2.png" width="80px"/></a>
             
             <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -59,10 +59,10 @@ export default function MenuTopComp(props) {
                     <a className="nav-link" href="/contact-us">ติดต่อเรา</a>
                 </li>
                 </ul>
-                <div className="form-inline my-2 my-lg-0">
+                {/* <div className="form-inline my-2 my-lg-0">
                     <input className="form-control mr-sm-3" type="search" placeholder="ค้นหาสินค้า" aria-label="Search" style={{borderRadius : "1.1rem"}}/>
                     <button className="btn btn-outline-secondary my-2 my-sm-0 btn-sm" type="submit"><i className="fas fa-search"></i></button>
-                </div>
+                </div> */}
             </div>
             </div>
             </nav>
