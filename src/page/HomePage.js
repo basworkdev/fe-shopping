@@ -21,24 +21,33 @@ export default function HomePage(props) {
     const [roofRackState , setRoofRackState] = useState([])
     const [sideStepState , setSideStepState] = useState([])
     const [roofTopTentStete , setRooftoptentState] = useState([])
+    const [campingAccessoriesState,setCampingAccessoriesState] = useState([])
 
 
     useEffect(async () => {
         setSpinnerState(true)
-        let ROOF_TOP_TENT = await getProductByType("ROOF_TOP_TENT");
-        let FRONT_BUMPER = await getProductByType("FRONT_BUMPER");
-        let REAR_BUMPER = await getProductByType("REAR_BUMPER");
-        let ROLL_BAR = await getProductByType("ROLL_BAR");
-        let ROOF_RACK = await getProductByType("ROOF_RACK");
-        let SIDE_STEP = await getProductByType("SIDE_STEP");
+        try {
+            let ROOF_TOP_TENT = await getProductByType("ROOF_TOP_TENT");
+            let FRONT_BUMPER = await getProductByType("FRONT_BUMPER");
+            let REAR_BUMPER = await getProductByType("REAR_BUMPER");
+            let ROLL_BAR = await getProductByType("ROLL_BAR");
+            let ROOF_RACK = await getProductByType("ROOF_RACK");
+            let SIDE_STEP = await getProductByType("SIDE_STEP");
+            let CAMPING_ACCESSORIES = await getProductByType("CAMPING_ACCESSORIES");
 
-        setRooftoptentState(ROOF_TOP_TENT);
-        setFronBumperState(FRONT_BUMPER);
-        setRearBumperState(REAR_BUMPER);
-        setRollBarState(ROLL_BAR)
-        setRoofRackState(ROOF_RACK)
-        setSideStepState(SIDE_STEP)
-        setSpinnerState(false)
+            setRooftoptentState(ROOF_TOP_TENT);
+            setFronBumperState(FRONT_BUMPER);
+            setRearBumperState(REAR_BUMPER);
+            setRollBarState(ROLL_BAR)
+            setRoofRackState(ROOF_RACK)
+            setSideStepState(SIDE_STEP)
+            setCampingAccessoriesState(CAMPING_ACCESSORIES)
+            setSpinnerState(false)
+        } catch (error) {
+            setSpinnerState(false)
+            console.log(error)
+        }
+        
 
     }, [])
 
@@ -76,11 +85,17 @@ export default function HomePage(props) {
                         {/* <div className="col-6 col-md-3 text-center">
                         </div> */}
                         <div className="col-6 col-md-3 text-center">
+                            <img src="../image/ironman4x4.png" width="50%"/>
+                        </div>
+                        <div className="col-6 col-md-3 text-center">
                             <img src="../image/twi.png" width="50%"/>
                         </div>
                         <div className="col-6 col-md-3 text-center">
                             <img src="../image/paa.png" width="50%"/>
                         </div>
+                        {/* <div className="col-6 col-md-3 text-center">
+                            <img src="../image/alu-cab.png" width="50%"/>
+                        </div> */}
                         <div className="col-6 col-md-3 text-center">
                             <img src="../image/friends_camp.png" width="50%"/>
                         </div>
@@ -101,7 +116,7 @@ export default function HomePage(props) {
                         <div className="col-md-6">
                             <div style={{paddingRight : "30px"}}>
                                 <br/>
-                                <img src="https://firebasestorage.googleapis.com/v0/b/rodxoffroadshop.appspot.com/o/product%2Frooftop_friends_camp_1_6%2Fmain-rooftop_friends_camp_1_6?alt=media&token=363ae20a-bc6f-4934-afb2-6fd6dd380272" width="100%"/>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/rodxoffroadshop.appspot.com/o/product%2Fironman4x4_rooftop_tent_nomad_1300%2Fironman4x4_rooftop_tent_nomad_1300-0?alt=media&token=e2e379d3-e61a-41d6-87d8-733a8f9e631d" width="100%"/>
                             </div>
                             <br/>
                         </div>
@@ -120,10 +135,10 @@ export default function HomePage(props) {
                                 </p>
                             {/* <p style={{textDecoration: "line-through"}} className="text-secondary">37,9000</p> */}
                             {/* <p style={{fontSize : "2rem",marginTop:"-20px"}} className="font-weight-bold">37,9000</p> */}
-                            <p style={{fontSize : "2rem"}} className="font-weight-bold">37,9000</p>
+                            <p style={{fontSize : "2rem"}} className="font-weight-bold">65,000</p>
                             {/* <div style={{width:"100%",marginTop:"-60px"}} className="text-right"> */}
                             <div style={{width:"100%",marginTop:"-30px"}} className="text-right">
-                                <a href="/product/rooftop_friends_camp_1_6" className="btn btn-primary" style={{width:"100px"}}>รายละเอียด</a>
+                                <a href="/product/ironman4x4_rooftop_tent_nomad_1300" className="btn btn-primary" style={{width:"100px"}}>รายละเอียด</a>
                             </div>
                             </div>
                             
@@ -140,6 +155,19 @@ export default function HomePage(props) {
                     <a href="/catalog/roof_top_tent" type="button" className="btn btn-primary">เพิ่มเติม</a>
                 </div>
                 <br/>
+            </div>
+            <div className="container">
+                <div className="line-product-title">
+                    <h4>อุปกรณ์แคมป์ปิ้ง</h4>
+                    <p className="p-product-title text-secondary">อุปกร์แคมป์ปิ้งคุณภ่าพ ทนทาน แข็งแรง</p>
+                </div>
+                <br/>
+                <div className="row">
+                    {setCardProduct(campingAccessoriesState)}
+                </div>
+                <div className="text-right other-btn">
+                    <a href="/catalog/camping_accessories" type="button" className="btn btn-primary">เพิ่มเติม</a>
+                </div>
             </div>
             <div className="bg-camping1">
             </div>

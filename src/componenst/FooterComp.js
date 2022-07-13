@@ -18,6 +18,9 @@ export default function FooterComp(props) {
                             <h5>แบรนด์ที่จำหน่าย</h5>
                             <div className="row" style={{marginTop : "1.5rem"}}>
                                 <div className="col-3 col-md-3 footer-brand">
+                                    <img src={`../image/ironman4x4.png`} className="footer-brand-image"/>
+                                </div>
+                                <div className="col-3 col-md-3 footer-brand">
                                     <img src={`../image/twi.png`} className="footer-brand-image"/>
                                 </div>
                                 <div className="col-3 col-md-3 footer-brand">
