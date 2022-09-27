@@ -22,10 +22,11 @@ export default function HomePage(props) {
     const [sideStepState , setSideStepState] = useState([])
     const [roofTopTentStete , setRooftoptentState] = useState([])
     const [campingAccessoriesState,setCampingAccessoriesState] = useState([])
-
+    const [assistiveDeviceOffRoadState , setAssistiveDeviceOffRoadState] = useState([])
+    const [awningsAndAccessoriesState , setAwningsAndAccessoriesState] = useState([])
 
     useEffect(async () => {
-        setSpinnerState(true)
+        // setSpinnerState(true)
         try {
             let ROOF_TOP_TENT = await getProductByType("ROOF_TOP_TENT");
             let FRONT_BUMPER = await getProductByType("FRONT_BUMPER");
@@ -34,6 +35,8 @@ export default function HomePage(props) {
             let ROOF_RACK = await getProductByType("ROOF_RACK");
             let SIDE_STEP = await getProductByType("SIDE_STEP");
             let CAMPING_ACCESSORIES = await getProductByType("CAMPING_ACCESSORIES");
+            let ASSISTIVE_DEVICE_OFF_ROAD = await getProductByType("ASSISTIVE_DEVICE_OFF_ROAD");
+            let AWNINGS_AND_ACCESSORIES = await getProductByType("AWNINGS_AND_ACCESSORIES");
 
             setRooftoptentState(ROOF_TOP_TENT);
             setFronBumperState(FRONT_BUMPER);
@@ -42,7 +45,9 @@ export default function HomePage(props) {
             setRoofRackState(ROOF_RACK)
             setSideStepState(SIDE_STEP)
             setCampingAccessoriesState(CAMPING_ACCESSORIES)
-            setSpinnerState(false)
+            setAssistiveDeviceOffRoadState(ASSISTIVE_DEVICE_OFF_ROAD)
+            setAwningsAndAccessoriesState(AWNINGS_AND_ACCESSORIES)
+            // setSpinnerState(false)
         } catch (error) {
             setSpinnerState(false)
             console.log(error)
@@ -69,13 +74,17 @@ export default function HomePage(props) {
     return(
         <>
             <SpinnerComp spinner={spinnerState}/>
-            <div className="slide-container">
-                <SlideComp className=""/>
-                <div className="slide-top-left">
-                    <img src="../image/slide-top2.png" width="100%"/>
-                </div>
-                <div className="slide-bottom-left">
-                    <img src="../image/slide-bottom.png" width="100%"/>
+            <div style={{marginTop:"50px"}}>
+                <div className="slide-container">
+                    
+                        <SlideComp className=""/>
+                    
+                    <div className="slide-top-left">
+                        <img src="../image/slide-top2.png" width="100%"/>
+                    </div>
+                    <div className="slide-bottom-left">
+                        <img src="../image/slide-bottom.png" width="100%"/>
+                    </div>
                 </div>
             </div>
 
@@ -86,6 +95,12 @@ export default function HomePage(props) {
                         </div> */}
                         <div className="col-6 col-md-3 text-center">
                             <img src="../image/ironman4x4.png" width="50%"/>
+                        </div>
+                        <div className="col-6 col-md-3 text-center">
+                            <img src="../image/tjm.png" width="50%"/>
+                        </div>
+                        <div className="col-6 col-md-3 text-center">
+                            <img src="../image/option.png" width="50%"/>
                         </div>
                         <div className="col-6 col-md-3 text-center">
                             <img src="../image/twi.png" width="50%"/>
@@ -156,6 +171,21 @@ export default function HomePage(props) {
                 </div>
                 <br/>
             </div>
+
+            <div className="container">
+                <div className="line-product-title">
+                    <h4>กันสาดและอุปกรณ์เสริม</h4>
+                    <p className="p-product-title text-secondary">กันสาดข้างตัวรถและอุปกรณ์เสริมต่างๆ จะช่วยอำนวยความสะดวกให้กับการไปตั้งแคมป์ของคุณได้อย่างมาก</p>
+                </div>
+                <br/>
+                <div className="row">
+                    {setCardProduct(awningsAndAccessoriesState)}
+                </div>
+                <div className="text-right other-btn">
+                    <a href="/catalog/awnings_and_accessories" type="button" className="btn btn-primary">เพิ่มเติม</a>
+                </div>
+            </div>
+
             <div className="container">
                 <div className="line-product-title">
                     <h4>อุปกรณ์แคมป์ปิ้ง</h4>
@@ -167,6 +197,21 @@ export default function HomePage(props) {
                 </div>
                 <div className="text-right other-btn">
                     <a href="/catalog/camping_accessories" type="button" className="btn btn-primary">เพิ่มเติม</a>
+                </div>
+            </div>
+
+
+            <div className="container">
+                <div className="line-product-title">
+                    <h4>อุปกรณ์ช่วยเหลือในเส้นทางออฟโรด</h4>
+                    <p className="p-product-title text-secondary">อุปกรณ์ช่วยเหลือในเส้นทางออฟโรด เพื่อให้เราไปถึงเส้นชัยและเป่าหมายที่เราตั้งไว้</p>
+                </div>
+                <br/>
+                <div className="row">
+                    {setCardProduct(assistiveDeviceOffRoadState)}
+                </div>
+                <div className="text-right other-btn">
+                    <a href="/catalog/assistive_device_off_road" type="button" className="btn btn-primary">เพิ่มเติม</a>
                 </div>
             </div>
             <div className="bg-camping1">

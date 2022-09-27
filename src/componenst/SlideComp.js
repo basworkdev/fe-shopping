@@ -2,7 +2,7 @@ import React , {useState , useEffect} from "react";
 import { Carousel } from 'react-bootstrap';
 export default function SlideComp(props) {
     return (
-        <>
+        <div>
             <Carousel>
                 <Carousel.Item>
                     <img
@@ -40,6 +40,6 @@ export default function SlideComp(props) {
                     </Carousel.Caption>
                 </Carousel.Item> */}
                 </Carousel>
-        </>
+        </div>
     )
 }

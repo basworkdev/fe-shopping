@@ -14,9 +14,14 @@ import "../assets/css/product-page.css"
 import CardProductComp from "../componenst/CardProductComp"
 import SpinnerComp from "../componenst/SpinnerComp"
 import CartAlertComp from "../componenst/CartAlertComp"
+import ProductImageComp from "../componenst/ProductImageComp";
+import ModalContact from "../componenst/ModalContact";
 
 // ACT
 import { CartAct } from "../actions/CartAct";
+
+// config
+import webConfig from "../config/webConfig";
 
 
 const n = 0;
@@ -40,6 +45,7 @@ export default function ProductPage(props) {
     const [orderState , setOrderState] = useState(1);
     const [stockFullAlertState , setStockFullAlertState] = useState(false);
     const [popupCartState , setPopUpCartState] = useState(false);
+    const [showContactState , setShowContactState] = useState(false);
 
     const inStore = useSelector(state => {
         return state.CsCartRedu;
@@ -201,6 +207,12 @@ export default function ProductPage(props) {
         
     }
 
+    const setButtonContact = () => {
+        return <button style={{marginTop:"30px"}} type="button" className="btn btn-primary btn-lg btn-block" onClick={()=>setShowContactState(true)}>
+        <i className="fas fa-comment"></i> สั่งซื้อและสอบถามเกี่ยวกับสินค้า
+    </button>
+    } 
+
     const setButton = () => {
         if(productState.salesType === "PREORDER") {
             return <div style={{marginTop : 50}}>
@@ -271,11 +283,15 @@ export default function ProductPage(props) {
     return (
         <>
         <CartAlertComp status={popupCartState} data={detailPopUpCartState} getStatus={(e) => setPopUpCartState(e)} />
+        <ModalContact show={showContactState} onChange={(e)=>setShowContactState(e)}/>
         <SpinnerComp spinner={spinnerState}/>
+        
         {productState ? 
         <div className="container">
         <div className="row">
             <div className="col-md-6">
+                {/* <ProductImageComp/> */}
+
                 <div className="pro-img-page">
                     <div className="pro-container-discount-persen-page">
                         <img src={`${productImageState}`} width="100%"/>
@@ -346,7 +362,7 @@ export default function ProductPage(props) {
                             })}
                             
                         </div>
-                        {setButton()}
+                        {webConfig.system.btnBuy ? setButton() : setButtonContact()}
                         
                     </div>
                 </div>

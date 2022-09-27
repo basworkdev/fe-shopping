@@ -1,4 +1,5 @@
 import React , {useState , useEffect} from "react";
+import ContactFooterComp from "./ContactComp";
 export default function FooterComp(props) {
     return (
         <>
@@ -19,6 +20,12 @@ export default function FooterComp(props) {
                             <div className="row" style={{marginTop : "1.5rem"}}>
                                 <div className="col-3 col-md-3 footer-brand">
                                     <img src={`../image/ironman4x4.png`} className="footer-brand-image"/>
+                                </div>
+                                <div className="col-3 col-md-3 footer-brand">
+                                    <img src={`../image/tjm.png`} className="footer-brand-image"/>
+                                </div>
+                                <div className="col-3 col-md-3 footer-brand">
+                                    <img src={`../image/option2.png`} className="footer-brand-image"/>
                                 </div>
                                 <div className="col-3 col-md-3 footer-brand">
                                     <img src={`../image/twi.png`} className="footer-brand-image"/>
@@ -42,29 +49,38 @@ export default function FooterComp(props) {
                         <center>
                             <h5>SOCIAL MEDAI</h5>
                             <div className="row footer-icon">
-                                <div className="col-1"></div>
+                                <div className="col-3"></div>
                                 <div className="col-2">
-                                    <i className="fab fa-facebook"></i>
+                                    <a href="https://web.facebook.com/ufo4x4accessories" className="float-element" target="_back">
+                                        <i className="fab fa-facebook social-footer-icon" ></i>
+                                    </a>
+                                </div>
+                                {/* <div className="col-2">
+                                    <i className="fab fa-instagram social-footer-icon"></i>
+                                </div> */}
+                                {/* <div className="col-2">
+                                    <i className="fab fa-youtube social-footer-icon"></i>
+                                </div> */}
+                                {/* <div className="col-2">
+                                    <i className="fab fa-twitter social-footer-icon"></i>
+                                </div> */}
+                                <div className="col-2">
+                                    <a href="https://m.me/109283075234392" className="float-element" target="_back">
+                                        <i className="fab fa-facebook-messenger social-footer-icon" ></i>
+                                    </a>
                                 </div>
                                 <div className="col-2">
-                                    <i className="fab fa-instagram"></i>
+                                    <a href="https://lin.ee/xdm4N6q" className="float-element" target="_back">
+                                        <i className="fab fa-line social-footer-icon"></i>
+                                    </a>
                                 </div>
-                                <div className="col-2">
-                                    <i className="fab fa-youtube"></i>
-                                </div>
-                                <div className="col-2">
-                                    <i className="fab fa-twitter"></i>
-                                </div>
-                                <div className="col-2">
-                                    <i className="fab fa-line"></i>
-                                </div>
-                                <div className="col-1"></div>
+                                <div className="col-3"></div>
                             </div>
                             
                             <h5 style={{marginTop:"25px"}}>ติดต่อเรา</h5>
                             
-                            <p style={{marginBottom : "0px"}}><i className="fas fa-mobile-alt"></i> : 087-4451121</p>
-                            <p><i className="fas fa-envelope"></i> : rodxoffroad@gmail.com</p>
+                            <p style={{marginBottom : "0px"}}><i className="fas fa-mobile-alt"></i> : 098-4708144</p>
+                            <p><i className="fas fa-envelope"></i> : ufo4x4accessories@gmail.com</p>
                             </center>
                             
                         </div>

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "UFO4x4",
+  "name": "UFO4x4 จำหน่ายและติดตั้งอุปกรณ์ตกแต่งรถยนต์สไตล์ออฟโรด",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "/image/logo2.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "/image/logo2.png",
       "type": "image/png",
       "sizes": "512x512"
     }

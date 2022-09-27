@@ -39,6 +39,9 @@ import TopUpComp from './componenst/TopUpComp'
 // ACT
 import { CartAct } from "./actions/CartAct";
 
+// APIs
+import webConfig from "./config/webConfig";
+
 
 import {
     BrowserRouter as Router,
@@ -82,7 +85,8 @@ export default function Main(props) {
     return (
         <>
         <Router>
-        <NavBarTopComp/>
+        {webConfig.system.btnBuy ? <NavBarTopComp/> : <></>}
+        
         <div style={{zIndex : "99"}}>
             <div className="row text-center" style={{marginRight :"0px" ,marginLeft :"0px"}}>
                 <MenuTopComp/>
@@ -90,7 +94,9 @@ export default function Main(props) {
         </div>
         <OpenChatComp/>
         <CartButtonComp/>
+        
         <TopUpComp/>
+            <div style={{marginTop:"50px"}}>
             <Switch>
             {/* <Route path="/">
                 <HomePage/>
@@ -134,6 +140,7 @@ export default function Main(props) {
             </Route> */}
             <HomePage/>
             </Switch>
+            </div>
         </Router>
         <FooterComp/>
             
